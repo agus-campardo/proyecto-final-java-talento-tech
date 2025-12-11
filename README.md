@@ -62,32 +62,33 @@ src
     │   └── com
     │       └── techlab
     │           └── biblioteca
-    │               ├── controller
-    │               │   ├── LibroController.java            # Endpoints: /libros
-    │               │   └── PrestamoController.java         # Endpoints: /prestamos
-    │               ├── model
-    │               │   ├── Libro.java
-    │               │   └── Prestamo.java
-    │               ├── repository
-    │               │   ├── LibroDBRepository.java
-    │               │   ├── LibroMemRepository.java
-    │               │   ├── LibroRepository.java
-    │               │   ├── LibroRepositoryJPA.java
-    │               │   ├── PrestamoDBRepository.java
-    │               │   ├── PrestamoMemRepository.java
-    │               │   ├── PrestamoRepository.java
-    │               │   └── PrestamoRepositoryJPA.java
-    │               ├── service
-    │               │   ├── LibroService.java
-    │               │   ├── LibroServiceJPA.java
-    │               │   ├── PrestamoService.java
-    │               │   └── PrestamoServiceJPA.java
-    │               └── BibliotecaApplication.java
+    │               ├── controller                      # Manejan las solicitudes a los endpoints
+    │               │   ├── LibroController.java            # Endpoints /libros
+    │               │   └── PrestamoController.java         # Endpoints /prestamos
+    │               ├── model                           # Clases que representan las entidades 
+    │               │   ├── Libro.java                      # Entidad Libro
+    │               │   └── Prestamo.java                   # Entidad Prestamo
+    │               ├── repository                      # Acceso a datos (DB, memoria, JPA)
+    │               │   ├── LibroDBRepository.java          # Implementación DB para libros
+    │               │   ├── LibroMemRepository.java         # Implementación en memoria
+    │               │   ├── LibroRepository.java            # Interfez
+    │               │   ├── LibroRepositoryJPA.java         # Implementación usando JPA
+    │               │   ├── PrestamoDBRepository.java       # Implementación DB para préstamos
+    │               │   ├── PrestamoMemRepository.java      # Implementación en memoria
+    │               │   ├── PrestamoRepository.java         # Interfaz 
+    │               │   └── PrestamoRepositoryJPA.java      # Implementación usando JPA
+    │               ├── service                          # Maneja la parte lógica 
+    │               │   ├── LibroService.java               # Lógica para libros
+    │               │   ├── LibroServiceJPA.java            # Lógica usando JPA
+    │               │   ├── PrestamoService.java            # Lógica para préstamos
+    │               │   └── PrestamoServiceJPA.java         # Lógica usando JPA
+    │               └── BibliotecaApplication.java        
     └── resources
-        ├── application.yaml
-        ├── application-dev.yaml
-        ├── application-local.yaml
-        └── data.sql
+        ├── application.yaml                           # Configuración principal
+        ├── application-dev.yaml                       # Configuración para dev
+        ├── application-local.yaml                     # Configuración local
+        └── data.sql                                   # Datos iniciales para la DB 
+
 ```
 
 
