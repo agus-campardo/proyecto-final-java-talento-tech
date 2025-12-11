@@ -146,7 +146,8 @@ No considero que deba ser el Usuario quien mantenga un registro histórico de lo
 
 Asumiríamos que la cantidad de Préstamos que un Usuario puede sacar son infinitos (al igual que como ocurría con Libro y Préstamo), aunque se podría hacer para este caso que el Usuario tenga máximo de préstamos en su lista. No sería lógico que una misma persona tenga cuatrocientos préstamos hechos (aunque tampoco lo es que en una Biblioteca hayan infinitos libros, pero bueno).
 
-- **Mejoras en la entidad Prestamo**  
+- **Mejoras en la entidad Prestamo**
+  
   Utilizando la librería LocalDate, se podría agregar una fecha límite de devolución, por ejemplo, veinte días después del inicio del préstamo.
 
   En caso de un préstamos vencido, trabajaría con alguna librería que me permita gestionar mails y se enviaría al usuario un mail informándole su situación.
