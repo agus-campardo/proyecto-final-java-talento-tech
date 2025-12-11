@@ -5,7 +5,7 @@ Consiste en el desarrollo de un sistema de gestión para una Biblioteca, impleme
 **Controller → Service → Repository → Model**
 
 
-## Decisiones de Diseño y Justificaciones
+## Decisiones de Diseño, Justificaciones y Estructura
 Para este proyecto, se decidió modelar el funcionamiento de una biblioteca, en la cual se pueden solicitar libros en préstamo y devolverlo una vez utilizados. 
 A continuación, se describirán las decisiones tomadas durante el diseño del sistema y los "requieres" necesarios a cumplir por el usuario: 
 
@@ -28,13 +28,20 @@ Considero que el aumento a la cantidad de veces que ha sido prestado le correspo
 
 La cantidad de préstamos activo no está acotada, asumimos que tenemos espacio suficiente para manejar la cantidad de préstamos que se considere conveniente. 
 
+Al crearse un préstamo, el sistema asigna automáticamente la fecha del día mediante 'LocalDate.now()'. No queremos que el usuario deba específicar la fecha de forma manual. 
+
 ### Relación entre libros y préstamos
 Cada préstamo mantiene una referencia al libro correspondiente. 
 De esta forma, el sistema podrá conocer qué libro fue prestado y actualiza su stock o disponibilidad. 
 Así, un libro no puede ser eliminada si tiene préstamos asociados. 
 
+### Carga de datos
+Si bien es posible precargar los libros en 'data.sql', no ocurre lo mismo con los préstamos. 
+A los libros se les asigna su identificador ('id') solo después de ser insertados, por lo que no es posible conocer esos valores por adelantado. 
+Por lo tanto, los préstamos deben crearse de forma manual mediante los endpoints correspondientes
 
-## 🛠️ Tecnologías utilizadas
+
+## 🛠️ ¿Qué harramientas se utilizaron en este proyecto? 
 - **Java 17+**
 - **Spring Boot**
 - **Insomnia**
@@ -86,7 +93,7 @@ src
 
 ---
 
-## 🔌 Endpoints de la API
+## Endpoints de la API
 
 ### 📚 Gestión de Libros (`/libros`)
 
@@ -112,11 +119,10 @@ src
 
 ---
 
-## 🗄️ Acceso a H2 Console (modo local)
+## Acceso a H2 Console (modo local)
 
-- **URL:** http://localhost:8080/h2-console  
-- **JDBC URL:** `jdbc:h2:mem:testdb`  
+- **URL:** http://localhost:8080/h2-console  `  
 - **Usuario:** `sa`  
-- **Contraseña:** *(vacío)*  
+- **Contraseña:** *(vacío, no hay contraseña)*  
 
 ---
