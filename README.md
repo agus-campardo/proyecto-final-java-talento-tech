@@ -4,8 +4,10 @@ Este proyecto forma parte del **Trabajo Práctico Final** del curso **Talento Te
 Consiste en el desarrollo de un sistema de gestión para una Biblioteca, implementado con **Spring Boot**, utilizando una implementación en capas:  
 **Controller → Service → Repository → Model**
 
+En la parte final, dejo ideas para una futura implementación/mejora
 
-## Decisiones de Diseño, Justificaciones y Estructura
+
+## Decisiones de Diseño y Justificaciones
 Para este proyecto, se decidió modelar el funcionamiento de una biblioteca, en la cual se pueden solicitar libros en préstamo y devolverlo una vez utilizados. 
 A continuación, se describirán las decisiones tomadas durante el diseño del sistema y los "requieres" necesarios a cumplir por el usuario: 
 
@@ -42,9 +44,9 @@ Por lo tanto, los préstamos deben crearse de forma manual mediante los endpoint
 
 
 ## 🛠️ ¿Qué harramientas se utilizaron en este proyecto? 
-- **Java 17+**
+- **Java**
 - **Spring Boot**
-- **Insomnia**
+- **Insomnia**             # Cliente para probar endpoints de la Biblioteca API 
 - **Spring Web**
 - **Spring Data JPA**
 - **Hibernate / JPA**
@@ -127,3 +129,23 @@ src
 - **Contraseña:** *(vacío, no hay contraseña)*  
 
 ---
+
+## Ideas de futura implementación
+
+Además de lo ya planteado, el sistema de la Biblioteca podría mejorar implementando las siguientes ideas:
+
+- **Nueva entidad `Usuario`**  
+  Representaría a las personas que usan el sistema. Incluiría:  
+  - `id` único  
+  - `email`  
+  - una lista con sus `prestamos` asociados
+ 
+Entonces, si el Usuario es nuevo, se registraría al sistema con el préstamo que solicitó y Libro y Préstamo realizarían sus respectivas actualización ante este caso. 
+
+- **Mejoras en la entidad `Prestamo`**  
+  Utilizando la librería `LocalDate`, se podría agregar una fecha límite de devolución, por ejemplo, veinte días después del inicio del préstamo.
+
+  En caso de préstamos vencidos, el sistema enviaría un correo electrónico al usuario correspondiente, informándole su situación.
+
+  Además, cada Usuario podría tener un historial de préstamos para consultar cuáles realizó, si cumplió con las fechas de devolución y quién es el usuario más activo de la biblioteca.
+
