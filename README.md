@@ -6,7 +6,6 @@ Consiste en el desarrollo de un sistema de gestión para una Biblioteca, impleme
 
 En la parte final, dejo [ideas para futuras mejoras](#ideas-de-futura-implementacion)
 
-
 ## Decisiones de Diseño y Justificaciones
 Para este proyecto, se decidió modelar el funcionamiento de una biblioteca, en la cual se pueden solicitar libros en préstamo y devolverlo una vez utilizados. 
 A continuación, se describirán las decisiones tomadas durante el diseño del sistema y los "requieres" necesarios a cumplir por el usuario: 
