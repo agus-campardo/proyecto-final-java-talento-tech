@@ -4,7 +4,7 @@ Este proyecto forma parte del **Trabajo Práctico Final** del curso **Talento Te
 Consiste en el desarrollo de un sistema de gestión para una Biblioteca, implementado con **Spring Boot**, utilizando una implementación en capas:  
 **Controller → Service → Repository → Model**
 
-En la parte final, dejo ideas para una futura implementación/mejora
+En la parte final, dejo [ideas para futuras mejoras](#ideas-de-futura-implementacion)
 
 
 ## Decisiones de Diseño y Justificaciones
@@ -40,7 +40,7 @@ Así, un libro no puede ser eliminada si tiene préstamos asociados.
 ### Carga de datos
 Si bien es posible precargar los libros en 'data.sql', no ocurre lo mismo con los préstamos. 
 A los libros se les asigna su identificador ('id') solo después de ser insertados, por lo que no es posible conocer esos valores por adelantado. 
-Por lo tanto, los préstamos deben crearse de forma manual mediante los endpoints correspondientes
+Por lo tanto, los préstamos deben crearse de forma manual mediante los endpoints correspondientes. 
 
 
 ## 🛠️ ¿Qué harramientas se utilizaron en este proyecto? 
@@ -127,25 +127,30 @@ src
 - **URL:** http://localhost:8080/h2-console  `  
 - **Usuario:** `sa`  
 - **Contraseña:** *(vacío, no hay contraseña)*  
-
 ---
 
 ## Ideas de futura implementación
 
 Además de lo ya planteado, el sistema de la Biblioteca podría mejorar implementando las siguientes ideas:
 
-- **Nueva entidad `Usuario`**  
+- **Nueva entidad 'Usuario'**  
   Representaría a las personas que usan el sistema. Incluiría:  
-  - `id` único  
-  - `email`  
-  - una lista con sus `prestamos` asociados
+  - id único  
+  - email 
+  - una lista de prestamos **vigentes**
+  - int cantidadTotalDePréstamos
  
-Entonces, si el Usuario es nuevo, se registraría al sistema con el préstamo que solicitó y Libro y Préstamo realizarían sus respectivas actualización ante este caso. 
+Entonces, si el Usuario es nuevo, se registraría en el sistema junto con el préstamo que solicitó, y tanto la entiendad Libro como Prestamo realizarían sus respectivas actualizaciones ante este caso.
+Si no es nuevo aquel Usuario, nada más se le sumaría aquel préstamo que solicitó a su lista de préstamos vigentes (puede no tener ninguno también, no nos afecta si ya está registrado), y Libro y Préstamo realizarán las mismas acciones. 
 
-- **Mejoras en la entidad `Prestamo`**  
-  Utilizando la librería `LocalDate`, se podría agregar una fecha límite de devolución, por ejemplo, veinte días después del inicio del préstamo.
+No considero que deba ser el Usuario quien mantenga un registro histórico de los préstamos que realizó con toda la información de los mismos, sino contar con una lista de aquellos que estén activos y tener con un contador que indique la cantidad de veces que realizó un préstamo. Para no romper el encapsulamiento, la gestión del historial debería quedar a cargo del Service, y no almacenarse directamente en la entidad Usuario.
 
-  En caso de préstamos vencidos, el sistema enviaría un correo electrónico al usuario correspondiente, informándole su situación.
+Asumiríamos que la cantidad de Préstamos que un Usuario puede sacar son infinitos (al igual que como ocurría con Libro y Préstamo), aunque se podría hacer para este caso que el Usuario tenga máximo de préstamos en su lista. No sería lógico que una misma persona tenga cuatrocientos préstamos hechos (aunque tampoco lo es que en una Biblioteca hayan infinitos libros, pero bueno).
 
-  Además, cada Usuario podría tener un historial de préstamos para consultar cuáles realizó, si cumplió con las fechas de devolución y quién es el usuario más activo de la biblioteca.
+- **Mejoras en la entidad Prestamo**  
+  Utilizando la librería LocalDate, se podría agregar una fecha límite de devolución, por ejemplo, veinte días después del inicio del préstamo.
+
+  En caso de un préstamos vencido, trabajaría con alguna librería que me permita gestionar mails y se enviaría al usuario un mail informándole su situación.
+
+  Además, cada Usuario podría tener un historial de préstamos para consultar cuáles realizó, si cumplió con las fechas de devolución y quién es el usuario más activo de la biblioteca (y entregar mail/certificado de agradecimiento todos los meses/años).
 
