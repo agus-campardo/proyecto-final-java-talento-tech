@@ -15,12 +15,12 @@ public class Libro {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titulo;
-    private String autor;
+    private String titulo;         
+    private String autor;           
     private String isbn;
     private String genero;
-    private int stock;              // me llega un stock, va a ir cambiando a medida que se hagan las operaciones
-    private int vecesPrestado;      // saber el que más se prestó
+    private int stock;              // indica cuántos ejemplares del libro están disponibles
+    private int vecesPrestado;      // permite registrar cuántas veces fue solicitado
 
     // Constructor vacío (necesario para JPA)
     public Libro() {
