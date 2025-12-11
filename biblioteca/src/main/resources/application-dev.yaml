@@ -1,0 +1,11 @@
+repository:
+  active: LibroMemRepository
+
+spring:
+  persistencia: memoria
+  application:
+    name: biblioteca-dev
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
