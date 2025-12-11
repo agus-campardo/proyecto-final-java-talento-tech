@@ -18,6 +18,7 @@ Consiste en el desarrollo de un sistema de gestión para una Biblioteca, impleme
 ---
 
 ## 📂 Estructura del Proyecto
+'''text
 src
 └── main
     ├── java/com/techlab/biblioteca
@@ -47,7 +48,7 @@ src
           ├── application-dev.yaml               # Configuración desarrollo
           ├── application-local.yaml             # Configuración local
           └── data.sql                           # Datos iniciales
-
+'''
 Manejo de la App
 Los préstamos no se pueden pre-definir en data.sql porque requieren referencias a IDs de libros específicos, que son generados automáticamente por la base de datos. Los préstamos se crearán dinámicamente al usar los endpoints correspondientes.
 
