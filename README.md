@@ -4,7 +4,7 @@ Este proyecto forma parte del **Trabajo Práctico Final** del curso **Talento Te
 Consiste en el desarrollo de un sistema de gestión para una Biblioteca, implementado con **Spring Boot**, utilizando una implementación en capas:  
 **Controller → Service → Repository → Model**
 
-En la parte final, dejo [ideas para futuras mejoras](#ideas-de-futura-implementacion)
+En la parte final, dejo ideas para futuras mejoras. 
 
 ## Decisiones de Diseño y Justificaciones
 Para este proyecto, se decidió modelar el funcionamiento de una biblioteca, en la cual se pueden solicitar libros en préstamo y devolverlo una vez utilizados. 
