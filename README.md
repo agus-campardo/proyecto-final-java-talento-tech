@@ -4,6 +4,11 @@ Este proyecto forma parte del **Trabajo Práctico Final** del curso **Talento Te
 Consiste en el desarrollo de un sistema de gestión para una Biblioteca, implementado con **Spring Boot**, utilizando una arquitectura en capas:  
 **Controller → Service → Repository → Model**
 
+## Decisiones de Diseño 
+- Libro representa un conjunto de Ejemplares de libros. De esta forma, el ID no es para cada Ejemplar, sino que para un conjunto de ellos,
+- categorizados por el título. 
+- Los préstamos no se pueden pre-definir en data.sql porque requieren referencias a IDs de libros específicos, que son generados automáticamente por la base de datos. Los préstamos se crearán dinámicamente al usar los endpoints correspondientes.
+
 ---
 
 ## 🛠️ Tecnologías utilizadas
@@ -18,40 +23,41 @@ Consiste en el desarrollo de un sistema de gestión para una Biblioteca, impleme
 ---
 
 ## 📂 Estructura del Proyecto
-'''text
+
+```text
 src
 └── main
-    ├── java/com/techlab/biblioteca
-    │     ├── controller
-    │     │   ├── LibroController.java           # Endpoints: /libros
-    │     │   └── PrestamoController.java        # Endpoints: /prestamos
-    │     ├── model
-    │     │   ├── Libro.java                     # Entidad Libro
-    │     │   └── Prestamos.java                 # Entidad Préstamo
-    │     ├── repository
-    │     │   ├── LibroRepository.java           # Interfaz LibroRepository
-    │     │   ├── LibroDBRepository.java         # Implementación DB
-    │     │   ├── LibroMemRepository.java        # Implementación Memoria
-    │     │   ├── LibroRepositoryJPA.java        # Implementación JPA
-    │     │   ├── PrestamosRepository.java       # Interfaz PrestamoRepository
-    │     │   ├── PrestamoDBRepository.java      # Implementación DB
-    │     │   ├── PrestamoMemRepository.java     # Implementación Memoria
-    │     │   └── PrestamoRepositoryJPA.java     # Implementación JPA
-    │     ├── service
-    │     │   ├── LibroService.java              # Interfaz LibroService
-    │     │   ├── LibroServiceJPA.java           # Implementación LibroService
-    │     │   ├── PrestamoService.java           # Interfaz PrestamoService
-    │     │   └── PrestamoServiceJPA.java        # Implementación PrestamoService
-    │     └── BibliotecaApplication.java         # Clase principal
+    ├── java
+    │   └── com
+    │       └── techlab
+    │           └── biblioteca
+    │               ├── controller
+    │               │   ├── LibroController.java            # Endpoints: /libros
+    │               │   └── PrestamoController.java         # Endpoints: /prestamos
+    │               ├── model
+    │               │   ├── Libro.java
+    │               │   └── Prestamo.java
+    │               ├── repository
+    │               │   ├── LibroDBRepository.java
+    │               │   ├── LibroMemRepository.java
+    │               │   ├── LibroRepository.java
+    │               │   ├── LibroRepositoryJPA.java
+    │               │   ├── PrestamoDBRepository.java
+    │               │   ├── PrestamoMemRepository.java
+    │               │   ├── PrestamoRepository.java
+    │               │   └── PrestamoRepositoryJPA.java
+    │               ├── service
+    │               │   ├── LibroService.java
+    │               │   ├── LibroServiceJPA.java
+    │               │   ├── PrestamoService.java
+    │               │   └── PrestamoServiceJPA.java
+    │               └── BibliotecaApplication.java
     └── resources
-          ├── application.yaml                   # Configuración principal
-          ├── application-dev.yaml               # Configuración desarrollo
-          ├── application-local.yaml             # Configuración local
-          └── data.sql                           # Datos iniciales
-'''
-Manejo de la App
-Los préstamos no se pueden pre-definir en data.sql porque requieren referencias a IDs de libros específicos, que son generados automáticamente por la base de datos. Los préstamos se crearán dinámicamente al usar los endpoints correspondientes.
-
+        ├── application.yaml
+        ├── application-dev.yaml
+        ├── application-local.yaml
+        └── data.sql
+```
 
 
 ---
@@ -82,35 +88,6 @@ Los préstamos no se pueden pre-definir en data.sql porque requieren referencias
 
 ---
 
-
-# 🔌 Endpoints de la API
-
-## 📚 Gestión de Libros (`/libros`)
-
-| Método | Endpoint | Descripción | Ejemplo |
-|--------|----------|-------------|---------|
-| GET | `/libros` | Listar todos los libros | `GET /libros` |
-| GET | `/libros/{id}` | Obtener libro por ID | `GET /libros/1` |
-| POST | `/libros` | Crear nuevo libro | `POST /libros` |
-| PUT | `/libros/{id}` | Actualizar libro | `PUT /libros/1` |
-| DELETE | `/libros/{id}` | Eliminar libro | `DELETE /libros/1` |
-| POST | `/libros/{id}/prestar` | Prestar libro | `POST /libros/1/prestar` |
-| POST | `/libros/{id}/devolver` | Devolver libro | `POST /libros/1/devolver` |
-
----
-
-## 📋 Gestión de Préstamos (`/prestamos`)
-
-| Método | Endpoint | Descripción | Ejemplo |
-|--------|----------|-------------|---------|
-| GET | `/prestamos` | Listar todos los préstamos | `GET /prestamos` |
-| GET | `/prestamos/activos` | Listar préstamos activos | `GET /prestamos/activos` |
-| GET | `/prestamos/{id}` | Obtener préstamo por ID | `GET /prestamos/1` |
-| POST | `/prestamos` | Crear préstamo | `POST /prestamos?libroId=1` |
-| POST | `/prestamos/{id}/devolver` | Devolver préstamo | `POST /prestamos/1/devolver` |
-
----
-
 ## 🗄️ Acceso a H2 Console (modo local)
 
 - **URL:** http://localhost:8080/h2-console  
@@ -120,8 +97,15 @@ Los préstamos no se pueden pre-definir en data.sql porque requieren referencias
 
 ---
 
-## 👨‍💻 Autor
+## 📋 Ejemplos de Uso
 
-**Curso:** Talento Tech - Java Backend  
-**Cuatrimestre:** 2do Cuatrimestre 2025  
-**Trabajo:** Proyecto Final - Sistema de Gestión de Biblioteca  
+### Crear un libro
+```bash
+curl -X POST "http://localhost:8080/libros" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "titulo": "1984",
+    "autor": "George Orwell",
+    "isbn": "978-0451524935",
+    "disponible": true
+  }'
