@@ -1,4 +1,4 @@
-# 📚 Proyecto Final - Sistema de Gestión de Biblioteca  
+# Proyecto Final - Sistema de Gestión de Biblioteca  
 
 Este proyecto forma parte del **Trabajo Práctico Final** del curso **Talento Tech - Java Backend (2do Cuatrimestre 2025)**.  
 Consiste en el desarrollo de un sistema de gestión para una Biblioteca, implementado con **Spring Boot**, utilizando una implementación en capas:  
@@ -54,7 +54,7 @@ Por lo tanto, los préstamos deben crearse de forma manual mediante los endpoint
 
 ---
 
-## 📂 Estructura del Proyecto
+## Estructura del Proyecto
 
 ```text
 src
